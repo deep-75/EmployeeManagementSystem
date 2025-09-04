@@ -44,4 +44,4 @@ The project uses **Entity Framework Core** with **SQL Server Express** and imple
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/EmployeeManagementSystem.git
+   git clone https://github.com/deep-75/EmployeeManagementSystem.git
