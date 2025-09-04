@@ -1,0 +1,111 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using EmployeeManagementSystem.Models
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@model dynamic
+
+<div class="container-fluid">
+    <!-- Hero Section -->
+    <div class="row bg-primary text-white py-5 mb-4 rounded shadow-sm">
+        <div class="col-md-8">
+            <h1 class="display-4 fw-bold">Welcome to EMS</h1>
+            <p class="lead">Manage employees, attendance, leaves, tasks, and notifications efficiently.</p>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <i class="bi bi-people-fill" style="font-size:6rem; opacity:0.3;"></i>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-4">
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <div class="col-md-3">
+                <div class="card text-white bg-success mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-people"></i> Total Employees</h5>
+                        <p class="card-text fs-3">@Model.TotalEmployees</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-calendar-check"></i> Attendance Records</h5>
+                        <p class="card-text fs-3">@Model.TotalAttendance</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-info mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-briefcase"></i> Leaves</h5>
+                        <p class="card-text fs-3">@Model.TotalLeaves</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-danger mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-list-task"></i> Tasks</h5>
+                        <p class="card-text fs-3">@Model.TotalTasks</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (SignInManager.IsSignedIn(User) && User.IsInRole("Employee"))
+        {
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-person"></i> My Profile</h5>
+                        <a class="btn btn-light btn-sm" asp-controller="EmployeeProfile" asp-action="MyProfile">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-calendar-check"></i> My Attendance</h5>
+                        <a class="btn btn-light btn-sm" asp-controller="Attendance" asp-action="MyAttendance">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-list-task"></i> My Tasks</h5>
+                        <a class="btn btn-light btn-sm" asp-controller="Tasks" asp-action="MyTasks">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Quick Links / CTA -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body text-center">
+                    @if (!SignInManager.IsSignedIn(User))
+                    {
+                        <h4 class="card-title mb-3">Get started with EMS today!</h4>
+                        <a class="btn btn-primary btn-lg me-2" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        <a class="btn btn-outline-primary btn-lg" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    }
+                    else
+                    {
+                        <h4 class="card-title mb-3">Navigate quickly from the sidebar.</h4>
+                        <p class="card-text">Access your profile, tasks, attendance, and notifications.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        console.log("Home page loaded");
+    </script>
+}

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.ViewModels.NotificationItemVM>
+@{
+    ViewData["Title"] = "My Notifications";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No notifications yet.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th style="width:150px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var n in Model)
+            {
+                <tr>
+                    <td>@n.Message</td>
+                    <td>@n.CreatedAt.ToString("g")</td>
+                    <td>
+                        @if (n.IsRead)
+                        {
+                            <span class="badge bg-success">Read</span>
+                        }
+                        else
+                        {
+
+                            <span class="badge bg-warning text-dark">Unread</span>
+                        }
+                    </td>
+                    <td>
+                        @if (!n.IsRead)
+                        {
+                            <form asp-action="MarkAsRead" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@n.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-success">Mark as Read</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

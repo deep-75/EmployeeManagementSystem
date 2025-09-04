@@ -1,0 +1,27 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.Employee>
+
+<h3>Employees in @ViewBag.DepartmentName</h3>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Position</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.Name</td>
+                <td>@emp.Email</td>
+                <td>@emp.Position</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary mt-2">
+    <i class="bi bi-arrow-left"></i> Back to Departments
+</a>

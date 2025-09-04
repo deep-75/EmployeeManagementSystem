@@ -1,0 +1,39 @@
+﻿@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+@model IEnumerable<EmployeeManagementSystem.Models.Attendance>
+<h2>All Attendance</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Date</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Day Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var att in Model)
+        {
+            <tr>
+                <td>@att.Employee.UserName</td>
+                <td>@att.Date.ToShortDateString()</td>
+                <td>@att.CheckInTime?.ToString("HH:mm")</td>
+                <td>@att.CheckOutTime?.ToString("HH:mm")</td>
+                <td>@att.DayType</td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+<br>
+<h4> You can check-in check-out only once per day.</h4>
+<br />
+<a class="btn btn-success" asp-controller="Attendance" asp-action="CheckIn">Check In</a>
+<a class="btn btn-danger" asp-controller="Attendance" asp-action="CheckOut">Check Out</a>

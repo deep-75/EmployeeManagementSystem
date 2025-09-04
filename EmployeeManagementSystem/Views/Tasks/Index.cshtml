@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using EmployeeManagementSystem.Models
+@inject UserManager<AppUser> UserManager
+
+@model IEnumerable<EmployeeManagementSystem.Models.TaskItem>
+
+@{
+    ViewData["Title"] = "Tasks";
+    var currentUserId = UserManager.GetUserId(User);
+}
+<h2>Task List <a asp-action="Create" class="btn btn-primary">Create Task</a></h2>
+<br /> 
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>Due Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            var isOverdue = task.DueDate.HasValue && task.DueDate.Value < DateTime.Now && task.Status != "Completed";
+            var isAssignedToCurrentUser = task.AssignedToUserId == currentUserId; // ✅ Compare ID string, not object
+
+            <tr class="@(isOverdue ? "table-danger" : "")">
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>@task.AssignedTo?.UserName</td>
+                <td>@task.Status</td>
+                <td>@(task.DueDate.HasValue ? task.DueDate.Value.ToString("yyyy-MM-dd") : "N/A")</td>
+                <td>
+                    @if (User.IsInRole("Employee") && isAssignedToCurrentUser)
+                    {
+                        <!-- Employee can update their own task status -->
+                        <form asp-action="UpdateStatus" method="post">
+                            <input type="hidden" name="id" value="@task.Id" />
+                            <select name="status" class="form-control">
+                                <option value="Pending" selected="@(task.Status=="Pending")">Pending</option>
+                                <option value="InProgress" selected="@(task.Status=="InProgress")">In Progress</option>
+                                <option value="Completed" selected="@(task.Status=="Completed")">Completed</option>
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-primary mt-1">Update</button>
+                        </form>
+                    }
+                    @if (task.DueDate < DateTime.Now && task.Status != "Completed")
+                    {
+                        <form asp-action="NotifyEmployee" asp-route-id="@task.Id" method="post">
+                            <a class="nav-link" asp-controller="Notifications" asp-action="Create"><i class="bi bi-bell"></i> Send Notification</a>
+                        </form>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

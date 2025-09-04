@@ -1,0 +1,16 @@
+﻿@model EmployeeManagementSystem.Models.Attendance
+@{
+    ViewData["Title"] = "Delete Attendance";
+}
+
+<h3>Delete Attendance</h3>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete attendance for <strong>@Model.Employee.FullName</strong> on <strong>@Model.Date.ToString("dd-MMM-yyyy")</strong>?
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="AllAttendance" class="btn btn-secondary">Cancel</a>
+</form>

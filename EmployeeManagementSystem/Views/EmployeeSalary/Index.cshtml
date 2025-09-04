@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.EmployeeSalary>
+
+<h2>Employee Salaries</h2>
+<a asp-action="Create" class="btn btn-primary">Allocate Salary</a>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Base Salary</th>
+            <th>Bonus</th>
+            <th>Deductions</th>
+            <th>Net Salary</th>
+            <th>Effective From</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Employee.UserName</td>
+                <td>@s.BaseSalary</td>
+                <td>@s.Bonus</td>
+                <td>@s.Deductions</td>
+                <td>@s.NetSalary</td>
+                <td>@s.EffectiveFrom.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

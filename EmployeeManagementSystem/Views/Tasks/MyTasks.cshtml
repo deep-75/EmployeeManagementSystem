@@ -1,0 +1,39 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.TaskItem>
+
+<h2>My Tasks</h2>
+
+<div class="mb-3">
+ <a class="btn btn-primary" asp-controller="TaskComments" asp-action="Index">Comments</a>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var task in Model)
+    {
+        <tr class="@(task.Status == "Completed" ? "table-success" : task.Status == "InProgress" ? "table-warning" : "")">
+            <td>@task.Title</td>
+            <td>@task.Description</td>
+            <td>@task.DueDate?.ToShortDateString()</td>
+            <td>@task.Status</td>
+            <td>
+                @if (task.Status != "Completed")
+                {
+                    <form asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="id" value="@task.Id" />
+                        <select name="status" class="form-control">
+                            <option value="Pending" selected="@("Pending" == task.Status)">Pending</option>
+                            <option value="InProgress" selected="@("InProgress" == task.Status)">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </form>
+                }
+            </td>
+        </tr>
+    }
+</table>

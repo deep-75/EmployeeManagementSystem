@@ -1,0 +1,33 @@
+﻿@model EmployeeManagementSystem.ViewModels.UserImportViewModel
+
+@{
+    ViewData["Title"] = "Import User";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Import Employee as User</h2>
+    <form asp-action="ImportUser" method="post">
+        <div class="mb-3">
+            <label class="form-label">Select Employee</label>
+            <select asp-for="EmployeeId" asp-items="Model.Employees" class="form-select">
+                <option value="">-- Select Employee --</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Assign Role</label>
+            <select asp-for="Role" asp-items="Model.Roles" class="form-select"></select>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-person-plus"></i> Import User
+        </button>
+        <a asp-action="ManageUsers" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

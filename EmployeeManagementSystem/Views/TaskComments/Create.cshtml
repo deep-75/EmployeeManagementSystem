@@ -1,0 +1,30 @@
+﻿@model EmployeeManagementSystem.Models.ViewModels.TaskCommentCreateVM
+@{
+    ViewData["Title"] = "Add Comment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-3">Add Comment</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="TaskItemId" class="form-label">Task</label>
+        <select asp-for="TaskItemId" class="form-select" asp-items="ViewBag.TaskItemId">
+            <option value="">-- Select Task --</option>
+        </select>
+        <span asp-validation-for="TaskItemId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CommentText" class="form-label">Comment</label>
+        <textarea asp-for="CommentText" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="CommentText" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Post Comment</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Back</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

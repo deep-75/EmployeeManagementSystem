@@ -1,0 +1,25 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.ViewModels.NotificationViewModel>
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<h2>All Notifications</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>Receiver</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var n in Model)
+        {
+            <tr>
+                <td>@n.Message</td>
+                <td>@n.ReceiverId</td>
+            </tr>
+        }
+    </tbody>
+</table>

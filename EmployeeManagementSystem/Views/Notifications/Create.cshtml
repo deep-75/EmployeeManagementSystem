@@ -1,0 +1,33 @@
+﻿@model EmployeeManagementSystem.Models.ViewModels.NotificationCreateVM
+@{
+    ViewData["Title"] = "Send Notification";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="ReceiverId" class="form-label">Send To</label>
+        <select asp-for="ReceiverId" asp-items="Model.Employees" class="form-select">
+            <option value="">-- Select Employee --</option>
+        </select>
+        <span asp-validation-for="ReceiverId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Message" class="form-label">Message</label>
+        <textarea asp-for="Message" class="form-control"></textarea>
+        <span asp-validation-for="Message" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

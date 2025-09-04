@@ -1,0 +1,20 @@
+﻿@model EmployeeManagementSystem.Models.ViewModels.UserViewModel
+
+<h2>Edit User</h2>
+
+<form asp-action="EditUser" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="UserName" class="form-label"></label>
+        <input asp-for="UserName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="ManageUsers" class="btn btn-secondary">Back</a>
+</form>

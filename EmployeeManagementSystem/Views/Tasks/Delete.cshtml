@@ -1,0 +1,18 @@
+﻿@model EmployeeManagementSystem.Models.TaskItem
+@{
+    ViewData["Title"] = "Delete Task";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Task</h2>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete task "<strong>@Model.Title</strong>"?
+    All associated comments will also be deleted.
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

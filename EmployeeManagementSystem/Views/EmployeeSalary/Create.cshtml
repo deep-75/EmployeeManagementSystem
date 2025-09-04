@@ -1,0 +1,28 @@
+﻿@model EmployeeManagementSystem.ViewModels.EmployeeSalaryViewModel
+
+<h2>Allocate Salary</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Employee</label>
+        <select asp-for="EmployeeId" asp-items="Model.Employees" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label>Base Salary</label>
+        <input asp-for="BaseSalary" class="form-control" />
+        <span asp-validation-for="BaseSalary" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Bonus</label>
+        <input asp-for="Bonus" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Deductions</label>
+        <input asp-for="Deductions" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Effective From</label>
+        <input asp-for="EffectiveFrom" type="date" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+</form>

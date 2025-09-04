@@ -1,0 +1,14 @@
+﻿@model EmployeeManagementSystem.Models.Employee
+
+@{
+    ViewData["Title"] = "My Employee Profile";
+}
+
+<h2>My Employee Profile</h2>
+<div class="card p-3 shadow">
+    <h4>@Model.Name</h4>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Position:</strong> @Model.Position</p>
+    <p><strong>Department:</strong> @Model.Department?.Name</p>
+    <p><strong>Salary:</strong> @Model.Salary</p>
+</div>

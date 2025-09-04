@@ -1,0 +1,35 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.TaskComment>
+@{
+    ViewData["Title"] = "Task Comments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-3">Task Comments</h2>
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-primary">Add Comment</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Task</th>
+            <th>Comment</th>
+            <th>By</th>
+            <th>At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.TaskItem?.Title</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@c.Id">@c.CommentText</a>
+                </td>
+                <td>@c.User?.UserName</td>
+                <td>@c.CreatedAt.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>

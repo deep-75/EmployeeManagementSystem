@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.Department>
+
+    <h2>Departments</h2>
+    <br />
+<a asp-action="Create" class="btn btn-primary">New Department</a>
+<br /><br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>No. of Employees</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dept in Model)
+        {
+            <tr>
+                <td>@dept.Name</td>
+                <td>@dept.EmployeeCount</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@dept.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Employees" asp-route-id="@dept.Id" class="btn btn-sm btn-info">
+                        <i class="bi bi-people"></i> Employees
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

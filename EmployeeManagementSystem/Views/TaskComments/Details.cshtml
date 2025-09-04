@@ -1,0 +1,25 @@
+﻿@model EmployeeManagementSystem.Models.TaskComment
+@{
+    ViewData["Title"] = "Comment Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-3">Comment Details</h2>
+
+<div class="card p-3">
+    <dl class="row">
+        <dt class="col-sm-3">Task</dt>
+        <dd class="col-sm-9">@Model.TaskItem?.Title</dd>
+
+        <dt class="col-sm-3">By</dt>
+        <dd class="col-sm-9">@Model.User?.UserName (@Model.User?.Email)</dd>
+
+        <dt class="col-sm-3">At</dt>
+        <dd class="col-sm-9">@Model.CreatedAt.ToString("f")</dd>
+
+        <dt class="col-sm-3">Comment</dt>
+        <dd class="col-sm-9">@Model.CommentText</dd>
+    </dl>
+
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</div>

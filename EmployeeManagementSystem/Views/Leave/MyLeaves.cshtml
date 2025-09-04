@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.LeaveRequest>
+
+@{
+    ViewData["Title"] = "My Leave Requests";
+}
+
+<h2>My Leave Requests</h2>
+<h8>
+    <button>
+    <a class="nav-link text-dark" asp-controller="Leave" asp-action="ApplyLeave">Apply Leave</a>
+    </button>
+</h8>
+<br><br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Requested On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="text-center">No leave requests found.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.StartDate.ToShortDateString()</td>
+                    <td>@item.EndDate.ToShortDateString()</td>
+                    <td>@item.Reason</td>
+                    <td>
+                        @if (item.Status == "Pending")
+                        {
+                            <span class="badge bg-warning">Pending</span>
+                        }
+                        else if (item.Status == "Approved")
+                        {
+                            <span class="badge bg-success">Approved</span>
+                        }
+                        else if (item.Status == "Rejected")
+                        {
+                            <span class="badge bg-danger">Rejected</span>
+                        }
+                        else
+                        {
+                            @item.Status
+                        }
+                    </td>
+                    <td>@item.RequestDate.ToShortDateString()</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
